@@ -7,8 +7,14 @@ fig = plt.figure()
 ax = fig.add_subplot()
 
 # Define the payoff matrix
-payoff_matrixA = np.array([[-1, 1], [1, -1]])
+# payoff_matrixA = np.array([[3, 0], [0, 2]])
+# payoff_matrixB = np.array([[2, 0], [0, 3]])
+# payoff_matrixA = np.array([[1, -1], [-1, 1]])
+# payoff_matrixB = np.array([[-1, 1], [1, -1]])
+payoff_matrixA = np.array([[-1, -4], [0, -3]])
 payoff_matrixB = np.array([[-1, -4], [0, -3]])
+# payoff_matrixA = np.array([[1, -1], [-1, 1]])
+# payoff_matrixB = np.array([[1, -1], [-1, 1]])
 
 # Define the replicator dynamics function
 def replicator_dynamics(X, Y):
@@ -21,7 +27,7 @@ def replicator_dynamics(X, Y):
             x_vec = np.array([x, 1-x])
             y_vec = np.array([y, 1-y])
             x_dot[i, j] = x * (payoff_matrixA.dot(y_vec)[0] - x_vec.dot(payoff_matrixA.dot(y_vec)))
-            y_dot[i, j] = y * (payoff_matrixA.dot(x_vec)[0] - y_vec.dot(payoff_matrixA.dot(x_vec)))
+            y_dot[i, j] = y * (payoff_matrixB.dot(x_vec)[0] - y_vec.dot(payoff_matrixB.dot(x_vec)))
 
     return x_dot, y_dot
 
@@ -35,7 +41,7 @@ X, Y = np.meshgrid(x, y)
 U, V = replicator_dynamics(X, Y)
 
 # Plot the directional field
-#ax.quiver(X, Y, U, V)
+ax.quiver(X, Y, U, V)
 
 # Set the plot limits and labels
 ax.set_xlim(0, 1)
